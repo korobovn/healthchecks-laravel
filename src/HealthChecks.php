@@ -52,7 +52,7 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function classes(): array
     {
@@ -60,7 +60,7 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function exists(string $check_class): bool
     {
@@ -68,7 +68,7 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function groups(): array
     {
@@ -76,7 +76,7 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function groupExists(string $group_name): bool
     {
@@ -84,7 +84,7 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function execute(string $check_class): ResultInterface
     {
@@ -92,7 +92,7 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function groupExecute(string $group_name): array
     {
