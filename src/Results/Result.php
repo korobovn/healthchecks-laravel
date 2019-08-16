@@ -54,7 +54,7 @@ class Result implements ResultInterface
      */
     public function getErrorMessage(): ?string
     {
-        return $this->exception;
+        return $this->error_message;
     }
 
     /**
