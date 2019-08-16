@@ -16,7 +16,9 @@ return [
     |
     */
     'checks' => [
-        // checks classes
+        AvtoDev\HealthChecks\Checks\DatabaseAccessCheck::class,
+        AvtoDev\HealthChecks\Checks\MigrationsCheck::class,
+        AvtoDev\HealthChecks\Checks\RedisAccessCheck::class,
     ],
 
     'groups' => [

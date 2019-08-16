@@ -3,7 +3,7 @@
 namespace AvtoDev\HealthChecks;
 
 use InvalidArgumentException;
-use AvtoDev\HealthChecks\Checks\ResultInterface;
+use AvtoDev\HealthChecks\Results\ResultInterface;
 
 interface HealthChecksInterface
 {

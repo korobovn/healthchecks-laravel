@@ -7,7 +7,7 @@ namespace AvtoDev\HealthChecks;
 use InvalidArgumentException;
 use Illuminate\Contracts\Container\Container;
 use AvtoDev\HealthChecks\Checks\CheckInterface;
-use AvtoDev\HealthChecks\Checks\ResultInterface;
+use AvtoDev\HealthChecks\Results\ResultInterface;
 
 class HealthChecks implements HealthChecksInterface
 {
@@ -27,6 +27,8 @@ class HealthChecks implements HealthChecksInterface
      * @param string[]|array[] $checks
      * @param array[]          $groups
      * @param Container        $container
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct(array $checks, array $groups, Container $container)
     {
@@ -44,7 +46,9 @@ class HealthChecks implements HealthChecksInterface
                     return $container->make($class, ['options' => $options]);
                 };
             } else {
-                // throw an exception, or not?
+                throw new InvalidArgumentException(
+                    sprintf('Passed invalid check classname [%s]', (string) $class)
+                );
             }
         }
 

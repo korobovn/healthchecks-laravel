@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace AvtoDev\HealthChecks\Checks;
+namespace AvtoDev\HealthChecks\Results;
 
 use Exception;
 
