@@ -9,8 +9,7 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 
 class MigrationsCheck extends AbstractCheck
 {
-    protected const
-        COMMAND             = 'migrate';
+    protected const COMMAND = 'migrate';
     protected const OPTIONS = ['--pretend' => 'true', '--force' => 'true'];
 
     /**
