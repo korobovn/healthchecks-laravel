@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace AvtoDev\HealthChecks\Checks;
 
-use AvtoDev\HealthChecks\Results\ResultInterface;
 use Exception;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Redis\RedisManager;
 use Illuminate\Support\Str;
+use Illuminate\Redis\RedisManager;
+use AvtoDev\HealthChecks\Results\ResultInterface;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class RedisAccessCheck extends AbstractCheck
 {
@@ -35,7 +35,7 @@ class RedisAccessCheck extends AbstractCheck
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(array $options = []): ResultInterface
     {
@@ -47,8 +47,8 @@ class RedisAccessCheck extends AbstractCheck
         try {
             foreach ($connections as $connection) {
                 $connection_name = $connection ?? 'default-connection';
-                $redis_client = $this->redis_manager->connection($connection)->client();
-                $key = sprintf('%s:%s', $connection_name, $value = Str::random());
+                $redis_client    = $this->redis_manager->connection($connection)->client();
+                $key             = sprintf('%s:%s', $connection_name, $value = Str::random());
                 $redis_client->setex($key, 3, $value);
                 if ($redis_client->get($key) !== $value) {
                     return $this->fail(
@@ -57,7 +57,7 @@ class RedisAccessCheck extends AbstractCheck
                 }
             }
 
-            unset ($redis_client);
+            unset($redis_client);
 
             return $this->success();
         } catch (Exception $e) {

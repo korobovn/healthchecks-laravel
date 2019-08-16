@@ -10,7 +10,7 @@ use AvtoDev\HealthChecks\Results\ResultInterface;
 abstract class AbstractCheck implements CheckInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     abstract public function execute(array $options = []): ResultInterface;
 

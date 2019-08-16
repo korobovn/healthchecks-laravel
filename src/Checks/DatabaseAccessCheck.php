@@ -33,7 +33,7 @@ class DatabaseAccessCheck extends AbstractCheck
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(array $options = []): ResultInterface
     {
@@ -47,6 +47,7 @@ class DatabaseAccessCheck extends AbstractCheck
             foreach ($connections as $connection) {
                 $this->database_manager->connection($connection)->getPdo()->exec('SELECT 1;');
             }
+
             return $this->success();
         } catch (\Exception $e) {
             return $this->fail($e);

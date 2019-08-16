@@ -10,9 +10,8 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 class MigrationsCheck extends AbstractCheck
 {
     protected const
-        COMMAND = 'migrate',
-        OPTIONS = ['--pretend' => 'true', '--force' => 'true'];
-
+        COMMAND             = 'migrate';
+    protected const OPTIONS = ['--pretend' => 'true', '--force' => 'true'];
 
     /**
      * @var ConsoleKernel
@@ -30,14 +29,14 @@ class MigrationsCheck extends AbstractCheck
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(array $options = []): ResultInterface
     {
         try {
             $this->console_kernel->call(self::COMMAND, self::OPTIONS);
 
-            if (\strpos($this->console_kernel->output(), 'Nothing to migrate.') === false) {
+            if (\mb_strpos($this->console_kernel->output(), 'Nothing to migrate.') === false) {
                 return $this->fail(new \Exception('Not all migrations are migrated'));
             }
 
