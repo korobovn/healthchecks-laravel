@@ -31,7 +31,7 @@ class Result implements ResultInterface
     public function __construct(?Exception $exception = null)
     {
         $this->exception     = $exception;
-        $this->passed        = $this->exception !== null;
+        $this->passed        = $this->exception === null;
         $this->error_message = $this->exception
             ? sprintf('[%s] %s', \get_class($this->exception), $this->exception->getMessage())
             : null;
