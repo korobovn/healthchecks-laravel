@@ -36,7 +36,7 @@ class Server implements ServerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      */
@@ -52,7 +52,7 @@ class Server implements ServerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getHost(): string
     {
@@ -60,7 +60,7 @@ class Server implements ServerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      */
@@ -76,7 +76,7 @@ class Server implements ServerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPort(): int
     {
@@ -84,7 +84,7 @@ class Server implements ServerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      */
@@ -100,7 +100,7 @@ class Server implements ServerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTimeout(): int
     {

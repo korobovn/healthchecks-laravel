@@ -14,14 +14,6 @@ use AvtoDev\HealthChecks\Results\ResultInterface;
  */
 class ResultTest extends AbstractResultTestCase
 {
-    /**
-     * @inheritdoc
-     */
-    protected function makeInstance(...$args): ResultInterface
-    {
-        return new Result(...$args);
-    }
-
     public function testConstructor(): void
     {
         $result = $this->makeInstance();
@@ -33,5 +25,13 @@ class ResultTest extends AbstractResultTestCase
         $this->assertFalse($result->passed());
         $this->assertSame('[Exception] test', $result->getErrorMessage());
         $this->assertSame($exception, $result->getException());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function makeInstance(...$args): ResultInterface
+    {
+        return new Result(...$args);
     }
 }

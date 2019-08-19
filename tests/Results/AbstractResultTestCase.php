@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AvtoDev\HealthChecks\Tests\Results;
 
-use AvtoDev\HealthChecks\Results\ResultInterface;
 use AvtoDev\HealthChecks\Tests\AbstractTestCase;
+use AvtoDev\HealthChecks\Results\ResultInterface;
 
 abstract class AbstractResultTestCase extends AbstractTestCase
 {
@@ -15,7 +15,7 @@ abstract class AbstractResultTestCase extends AbstractTestCase
     protected $result_instance;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
@@ -25,7 +25,7 @@ abstract class AbstractResultTestCase extends AbstractTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function tearDown(): void
     {
@@ -43,7 +43,7 @@ abstract class AbstractResultTestCase extends AbstractTestCase
     }
 
     /**
-     * Returns testing instance
+     * Returns testing instance.
      *
      * @return ResultInterface
      */
