@@ -28,7 +28,7 @@ interface ServerInterface
      *
      * @param string $host
      *
-     * @return mixed
+     * @return ServerInterface
      */
     public function setHost(string $host): self;
 
@@ -44,30 +44,30 @@ interface ServerInterface
      *
      * @param int $port
      *
-     * @return mixed
+     * @return ServerInterface
      */
     public function setPort(int $port): self;
 
     /**
      * Return server port.
      *
-     * @return int|null
+     * @return int
      */
-    public function getPort(): ?int;
+    public function getPort(): int;
 
     /**
      * Set timeout (in seconds).
      *
      * @param int $timeout
      *
-     * @return mixed
+     * @return ServerInterface
      */
     public function setTimeout(int $timeout): self;
 
     /**
      * Return timout (in seconds).
      *
-     * @return int|null
+     * @return int
      */
-    public function getTimeout(): ?int;
+    public function getTimeout(): int;
 }

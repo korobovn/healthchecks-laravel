@@ -37,11 +37,9 @@ class DatabaseAccessCheck extends AbstractCheck
      */
     public function execute(array $options = []): ResultInterface
     {
-        $connections = \array_filter($options['connections']);
-
-        if (\count($connections) === 0) {
-            $connections = [null];
-        }
+        $connections = isset($options['connections']) && \count($options['connections']) > 0
+                ? \array_filter($options['connections'])
+                : [null];
 
         try {
             foreach ($connections as $connection) {

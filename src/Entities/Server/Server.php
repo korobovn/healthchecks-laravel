@@ -12,12 +12,12 @@ class Server implements ServerInterface
     protected $host;
 
     /**
-     * @var int|null
+     * @var int
      */
     protected $port;
 
     /**
-     * @var int|null
+     * @var int
      */
     protected $timeout;
 
@@ -78,7 +78,7 @@ class Server implements ServerInterface
     /**
      * @inheritdoc
      */
-    public function getPort(): ?int
+    public function getPort(): int
     {
         return $this->port;
     }
@@ -102,7 +102,7 @@ class Server implements ServerInterface
     /**
      * @inheritdoc
      */
-    public function getTimeout(): ?int
+    public function getTimeout(): int
     {
         return $this->timeout;
     }

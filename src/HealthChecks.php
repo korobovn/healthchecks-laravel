@@ -46,9 +46,7 @@ class HealthChecks implements HealthChecksInterface
                     return $container->make($class, ['options' => $options]);
                 };
             } else {
-                throw new InvalidArgumentException(
-                    sprintf('Passed invalid check classname [%s]', (string) $class)
-                );
+                throw new InvalidArgumentException(sprintf('Passed invalid check classname'));
             }
         }
 

@@ -39,11 +39,10 @@ class RedisAccessCheck extends AbstractCheck
      */
     public function execute(array $options = []): ResultInterface
     {
-        $connections = \array_filter($options['connections']);
+        $connections = isset($options['connections']) && \count($options['connections']) > 0
+            ? \array_filter($options['connections'])
+            : [null];
 
-        if (\count($connections) === 0) {
-            $connections = [null];
-        }
         try {
             foreach ($connections as $connection) {
                 $connection_name = $connection ?? 'default-connection';
