@@ -19,12 +19,23 @@ return [
         AvtoDev\HealthChecks\Checks\DatabaseAccessCheck::class,
         AvtoDev\HealthChecks\Checks\MigrationsCheck::class,
         AvtoDev\HealthChecks\Checks\RedisAccessCheck::class,
+        AvtoDev\HealthChecks\Checks\ServersPingCheck::class => [
+            'servers' => [
+                '8.8.8.8',
+                [
+                    'host'    => 'www.google.com',
+                    'port'    => '80',
+                    'timeout' => '2', //timeout in seconds
+                ],
+            ],
+        ],
     ],
 
     'groups' => [
-        'group-name' => [
-            'Some\\Check\\Class',
-            'One\\More\\Check\\Class',
+        'databases' => [
+            AvtoDev\HealthChecks\Checks\DatabaseAccessCheck::class,
+            AvtoDev\HealthChecks\Checks\MigrationsCheck::class,
+            AvtoDev\HealthChecks\Checks\RedisAccessCheck::class,
         ],
     ],
 
@@ -36,6 +47,6 @@ return [
     | Set 'null' for disabling this feature.
     |
     */
-    'route'   => '/status',
+    'route'  => '/status',
 
 ];
