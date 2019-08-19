@@ -32,7 +32,7 @@ class Server implements ServerInterface
     {
         $this->setHost($host);
         $this->setPort($port ?? self::DEFAULT_PORT);
-        $this->setTimeout($timeout ?? self::DEFAULT_PORT);
+        $this->setTimeout($timeout ?? self::DEFAULT_TIMEOUT);
     }
 
     /**
