@@ -92,7 +92,7 @@ class ServersPingCheck extends AbstractCheck
 
         if (!$socket) {
             throw new \RuntimeException(
-                sprintf('Server [%s:%d] looks is down', $server->getHost(), $server->getPort())
+                sprintf('It\'s seems server [%s:%d] is down', $server->getHost(), $server->getPort())
             );
         }
 
