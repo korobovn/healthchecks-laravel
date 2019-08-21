@@ -70,13 +70,6 @@ class HealthChecks implements HealthChecksInterface
     }
 
     /**
-     * @return array|ResultInterface[]
-     */
-    public function executeAll(): array
-    {
-    }
-
-    /**
      * @param string $check_class
      *
      * @throws InvalidArgumentException

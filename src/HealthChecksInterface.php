@@ -27,11 +27,4 @@ interface HealthChecksInterface
      * @return ResultInterface
      */
     public function execute(string $check_class): ResultInterface;
-
-    /**
-     * @throws InvalidArgumentException If passed unregistered checker class
-     *
-     * @return ResultInterface[]
-     */
-    public function executeAll(): array;
 }
