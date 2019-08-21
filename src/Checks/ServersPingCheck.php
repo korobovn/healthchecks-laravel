@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AvtoDev\HealthChecks\Checks;
 
 use AvtoDev\HealthChecks\Entities\Server\Server;
-use AvtoDev\HealthChecks\Entities\Server\ServerInterface;
 use AvtoDev\HealthChecks\Results\ResultInterface;
+use AvtoDev\HealthChecks\Entities\Server\ServerInterface;
 
 class ServersPingCheck extends AbstractCheck
 {
@@ -36,6 +36,7 @@ class ServersPingCheck extends AbstractCheck
                 foreach ($servers as $server) {
                     $this->pingServer($server);
                 }
+
                 return $this->success();
             } catch (\Exception $e) {
                 return $this->fail($e);
@@ -50,9 +51,9 @@ class ServersPingCheck extends AbstractCheck
      *
      * @param array $servers_array
      *
-     * @return array|ServerInterface[]
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return array|ServerInterface[]
      */
     protected function makeServers(array $servers_array): array
     {
@@ -80,9 +81,9 @@ class ServersPingCheck extends AbstractCheck
      *
      * @param ServerInterface $server
      *
-     * @return float
-     *
      * @throws \RuntimeException
+     *
+     * @return float
      */
     protected function pingServer(ServerInterface $server): float
     {
@@ -90,7 +91,7 @@ class ServersPingCheck extends AbstractCheck
         $socket    = fsockopen($server->getHost(), $server->getPort(), $errno, $errstr, $server->getTimeout());
         $stoptime  = microtime(true);
 
-        if (!$socket) {
+        if (! $socket) {
             throw new \RuntimeException(
                 sprintf('It\'s seems server [%s:%d] is down', $server->getHost(), $server->getPort())
             );
