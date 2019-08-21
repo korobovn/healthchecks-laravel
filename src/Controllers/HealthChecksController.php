@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace AvtoDev\HealthChecks\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 use AvtoDev\HealthChecks\HealthChecksInterface;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Routing\Controller;
 
 class HealthChecksController extends Controller
 {

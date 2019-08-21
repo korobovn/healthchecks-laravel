@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AvtoDev\HealthChecks\Tests\Entities\Server;
 
 use AvtoDev\HealthChecks\Entities\Server\Server;
-use AvtoDev\HealthChecks\Entities\Server\ServerInterface;
 use AvtoDev\HealthChecks\Tests\AbstractTestCase;
+use AvtoDev\HealthChecks\Entities\Server\ServerInterface;
 
 /**
  * Class ServerTest.
@@ -21,7 +21,7 @@ class ServerTest extends AbstractTestCase
     protected $server_instance;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
@@ -31,7 +31,7 @@ class ServerTest extends AbstractTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function tearDown(): void
     {
@@ -59,7 +59,7 @@ class ServerTest extends AbstractTestCase
         $args = [
             ['http://goole.com', null, null],
             ['http://goole.com', 8080, null],
-            ['http://goole.com', 8080, 20]
+            ['http://goole.com', 8080, 20],
         ];
 
         foreach ($args as [$host, $port, $timeout]) {
@@ -143,7 +143,7 @@ class ServerTest extends AbstractTestCase
     }
 
     /**
-     * Makes server instance
+     * Makes server instance.
      *
      * @param string   $host
      * @param int|null $port

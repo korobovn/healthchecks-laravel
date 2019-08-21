@@ -19,7 +19,7 @@ class RedisAccessCheck extends AbstractCheck
     /**
      * RedisCheck constructor.
      *
-     * @param RedisManager     $redis_manager
+     * @param RedisManager $redis_manager
      */
     public function __construct(RedisManager $redis_manager, array $options = [])
     {
@@ -36,7 +36,7 @@ class RedisAccessCheck extends AbstractCheck
         try {
             $connections = $this->options['connections'] ?? ['default'];
 
-            if (!\is_array($connections)) {
+            if (! \is_array($connections)) {
                 throw new \InvalidArgumentException(
                     sprintf('Connections option must be array, got %s', \gettype($connections))
                 );

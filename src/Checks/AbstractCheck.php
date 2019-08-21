@@ -28,7 +28,7 @@ abstract class AbstractCheck implements CheckInterface
     abstract public function execute(): ResultInterface;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function success(): ResultInterface
     {
@@ -36,7 +36,7 @@ abstract class AbstractCheck implements CheckInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fail(\Exception $exception): ResultInterface
     {

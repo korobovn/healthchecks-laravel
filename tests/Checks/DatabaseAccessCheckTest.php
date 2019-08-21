@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace AvtoDev\HealthChecks\Tests\Checks;
 
+use PDO;
+use Mockery\Mock;
+use InvalidArgumentException;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use AvtoDev\HealthChecks\Checks\CheckInterface;
 use AvtoDev\HealthChecks\Checks\DatabaseAccessCheck;
-use InvalidArgumentException;
-use Mockery\Mock;
-use PDO;
 
 /**
  * Class DatabaseAccessCheckTest.
@@ -32,17 +32,17 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
 
         // Test default connection
         $this->check_instance = $this->makeInstance();
-        $result = $this->check_instance->execute();
+        $result               = $this->check_instance->execute();
         $this->assertTrue($result->passed());
 
         // Test configured connection
         $this->check_instance = $this->makeInstance(['connections' => ['valid-connection']]);
-        $result = $this->check_instance->execute();
+        $result               = $this->check_instance->execute();
         $this->assertTrue($result->passed());
 
         // Test not configured connection
         $this->check_instance = $this->makeInstance(['connections' => ['invalid-connection']]);
-        $result = $this->check_instance->execute();
+        $result               = $this->check_instance->execute();
         $this->assertFalse($result->passed());
         $this->assertInstanceOf(InvalidArgumentException::class, $result->getException());
         $this->assertSame(
@@ -69,7 +69,7 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function makeInstance(array $options = []): CheckInterface
     {
@@ -77,14 +77,14 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
     }
 
     /**
-     * Mocks PDO object and swap it in DI container
+     * Mocks PDO object and swap it in DI container.
      *
      * @return PDO
      */
     protected function getPdoMock(): PDO
     {
         return $this->mock(PDO::class, function (PDO $pdo): void {
-            /** @var Mock $pdo */
+            /* @var Mock $pdo */
             $pdo->makePartial()
                 ->expects('exec')
                 ->twice()
@@ -94,7 +94,7 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
     }
 
     /**
-     * Mocks Connection object and swap it in DI container
+     * Mocks Connection object and swap it in DI container.
      *
      * @param PDO $pdo
      *
@@ -105,7 +105,7 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
         return $this->mock(
             Connection::class,
             function (Connection $connection) use ($pdo): void {
-                /** @var Mock $connection */
+                /* @var Mock $connection */
                 $connection->makePartial()
                     ->expects('getPdo')
                     ->twice()
@@ -114,7 +114,7 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
     }
 
     /**
-     * Mocks DatabaseManager object and swap it in DI container
+     * Mocks DatabaseManager object and swap it in DI container.
      *
      * @param Connection $connection
      *
@@ -125,7 +125,7 @@ class DatabaseAccessCheckTest extends AbstractCheckTestCase
         return $this->mock(
             DatabaseManager::class,
             function (DatabaseManager $manager) use ($connection): void {
-                /** @var Mock $manager */
+                /* @var Mock $manager */
                 $manager->makePartial()
                     ->expects('getDefaultConnection')
                     ->andReturn('default-connection')

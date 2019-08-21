@@ -14,14 +14,14 @@ interface CheckInterface
     public function execute(): ResultInterface;
 
     /**
-     * Returns success check result
+     * Returns success check result.
      *
      * @return ResultInterface
      */
     public function success(): ResultInterface;
 
     /**
-     * Returns failed check result
+     * Returns failed check result.
      *
      * @param \Exception $exception
      *

@@ -74,7 +74,6 @@ class HealthChecks implements HealthChecksInterface
      */
     public function executeAll(): array
     {
-
     }
 
     /**

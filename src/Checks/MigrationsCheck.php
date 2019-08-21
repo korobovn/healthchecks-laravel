@@ -10,14 +10,14 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 class MigrationsCheck extends AbstractCheck
 {
     /**
-     * Migrate command signature
+     * Migrate command signature.
      *
      * @var string
      */
     protected const MIGRATE_COMMAND = 'migrate';
 
     /**
-     * Migrate command options
+     * Migrate command options.
      *
      * @var array
      */

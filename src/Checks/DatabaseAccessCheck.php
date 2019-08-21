@@ -35,7 +35,7 @@ class DatabaseAccessCheck extends AbstractCheck
         try {
             $connections = $this->options['connections'] ?? [$this->database_manager->getDefaultConnection()];
 
-            if (!\is_array($connections)) {
+            if (! \is_array($connections)) {
                 throw new \InvalidArgumentException(
                     sprintf('Connections option must be array, got %s', \gettype($connections))
                 );

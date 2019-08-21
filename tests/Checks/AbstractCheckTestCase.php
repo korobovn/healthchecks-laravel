@@ -6,8 +6,8 @@ namespace AvtoDev\HealthChecks\Tests\Checks;
 
 use AvtoDev\HealthChecks\Checks\AbstractCheck;
 use AvtoDev\HealthChecks\Checks\CheckInterface;
-use AvtoDev\HealthChecks\Results\ResultInterface;
 use AvtoDev\HealthChecks\Tests\AbstractTestCase;
+use AvtoDev\HealthChecks\Results\ResultInterface;
 
 abstract class AbstractCheckTestCase extends AbstractTestCase
 {
@@ -17,7 +17,7 @@ abstract class AbstractCheckTestCase extends AbstractTestCase
     protected $check_instance;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
@@ -27,7 +27,7 @@ abstract class AbstractCheckTestCase extends AbstractTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function tearDown(): void
     {
@@ -69,7 +69,7 @@ abstract class AbstractCheckTestCase extends AbstractTestCase
     abstract public function testExecute(): void;
 
     /**
-     * Returns check instance
+     * Returns check instance.
      *
      * @param array $options
      *

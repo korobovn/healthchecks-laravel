@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AvtoDev\HealthChecks\Tests\Results;
 
-use AvtoDev\HealthChecks\Results\Result;
-use AvtoDev\HealthChecks\Results\ResultInterface;
-use AvtoDev\HealthChecks\Tests\AbstractTestCase;
 use Exception;
+use AvtoDev\HealthChecks\Results\Result;
+use AvtoDev\HealthChecks\Tests\AbstractTestCase;
+use AvtoDev\HealthChecks\Results\ResultInterface;
 
 /**
  * Class ResultTest.
@@ -22,7 +22,7 @@ class ResultTest extends AbstractTestCase
     protected $result_instance;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
@@ -32,7 +32,7 @@ class ResultTest extends AbstractTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function tearDown(): void
     {
@@ -99,7 +99,7 @@ class ResultTest extends AbstractTestCase
     }
 
     /**
-     * Make result instance
+     * Make result instance.
      *
      * @param Exception|null $exception
      *
