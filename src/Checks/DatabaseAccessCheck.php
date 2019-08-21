@@ -6,15 +6,9 @@ namespace AvtoDev\HealthChecks\Checks;
 
 use Illuminate\Database\DatabaseManager;
 use AvtoDev\HealthChecks\Results\ResultInterface;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class DatabaseAccessCheck extends AbstractCheck
 {
-    /**
-     * @var ConfigRepository
-     */
-    protected $config;
-
     /**
      * @var DatabaseManager
      */
@@ -23,25 +17,30 @@ class DatabaseAccessCheck extends AbstractCheck
     /**
      * DatabaseAccessCheck constructor.
      *
-     * @param DatabaseManager  $database_manager
-     * @param ConfigRepository $config
+     * @param DatabaseManager $database_manager
+     * @param array           $options
      */
-    public function __construct(DatabaseManager $database_manager, ConfigRepository $config)
+    public function __construct(DatabaseManager $database_manager, array $options = [])
     {
         $this->database_manager = $database_manager;
-        $this->config           = $config;
+
+        parent::__construct($options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function execute(array $options = []): ResultInterface
+    public function execute(): ResultInterface
     {
-        $connections = isset($options['connections']) && \count($options['connections']) > 0
-                ? \array_filter($options['connections'])
-                : [null];
-
         try {
+            $connections = $this->options['connections'] ?? [$this->database_manager->getDefaultConnection()];
+
+            if (!\is_array($connections)) {
+                throw new \InvalidArgumentException(
+                    sprintf('Connections option must be array, got %s', \gettype($connections))
+                );
+            }
+
             foreach ($connections as $connection) {
                 $this->database_manager->connection($connection)->getPdo()->exec('SELECT 1;');
             }

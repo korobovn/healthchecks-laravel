@@ -17,20 +17,14 @@ class HealthChecks implements HealthChecksInterface
     protected $fabrics = [];
 
     /**
-     * @var array[]
-     */
-    protected $groups = [];
-
-    /**
      * Create a new HealthChecks instance.
      *
      * @param string[]|array[] $checks
-     * @param array[]          $groups
      * @param Container        $container
      *
      * @throws InvalidArgumentException
      */
-    public function __construct(array $checks, array $groups, Container $container)
+    public function __construct(array $checks, Container $container)
     {
         foreach ($checks as $key => $value) {
             $class = \is_string($key)
@@ -49,8 +43,6 @@ class HealthChecks implements HealthChecksInterface
                 throw new InvalidArgumentException(sprintf('Passed invalid check classname'));
             }
         }
-
-        $this->groups = $groups;
     }
 
     /**
@@ -72,43 +64,17 @@ class HealthChecks implements HealthChecksInterface
     /**
      * {@inheritdoc}
      */
-    public function groups(): array
-    {
-        return \array_keys($this->groups);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function groupExists(string $group_name): bool
-    {
-        return \in_array($group_name, $this->groups(), true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function execute(string $check_class): ResultInterface
     {
         return $this->make($check_class)->execute();
     }
 
     /**
-     * {@inheritdoc}
+     * @return array|ResultInterface[]
      */
-    public function groupExecute(string $group_name): array
+    public function executeAll(): array
     {
-        if (! $this->groupExists($group_name)) {
-            throw new InvalidArgumentException("Checks group [$group_name] was not found");
-        }
 
-        $result = [];
-
-        foreach ($this->groups[$group_name] as $class) {
-            $result[$class] = $this->execute($class);
-        }
-
-        return $result;
     }
 
     /**

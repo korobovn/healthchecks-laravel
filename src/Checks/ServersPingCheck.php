@@ -28,9 +28,9 @@ class ServersPingCheck extends AbstractCheck
     /**
      * {@inheritdoc}
      */
-    public function execute(array $options = []): ResultInterface
+    public function execute(): ResultInterface
     {
-        if ($servers_array = ($options['servers'] ?? null)) {
+        if ($servers_array = ($this->options['servers'] ?? null)) {
             try {
                 $servers = $this->makeServers($servers_array);
                 foreach ($servers as $server) {

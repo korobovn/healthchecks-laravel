@@ -31,6 +31,20 @@ class HealthCheckCommand extends \Illuminate\Console\Command
      */
     public function handle(HealthChecksInterface $health_checks): int
     {
-        return 0;
+        $failed = false;
+
+        foreach ($health_checks->classes() as $check_class) {
+            $this->info(sprintf('Execute %s', $check_class));
+            $result = $health_checks->execute($check_class);
+
+            if ($result->passed()) {
+                $this->info(sprintf('%s  PASS', $check_class));
+            } else {
+                $this->comment(sprintf('%s  FAIL [%s]', $check_class, $result->getErrorMessage()));
+                $failed = true;
+            }
+        }
+
+        return (int) $failed;
     }
 }

@@ -9,9 +9,23 @@ interface CheckInterface
     /**
      * Execute the check.
      *
-     * @param array $options
+     * @return ResultInterface
+     */
+    public function execute(): ResultInterface;
+
+    /**
+     * Returns success check result
      *
      * @return ResultInterface
      */
-    public function execute(array $options = []): ResultInterface;
+    public function success(): ResultInterface;
+
+    /**
+     * Returns failed check result
+     *
+     * @param \Exception $exception
+     *
+     * @return ResultInterface
+     */
+    public function fail(\Exception $exception): ResultInterface;
 }

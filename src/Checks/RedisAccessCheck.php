@@ -8,7 +8,6 @@ use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Redis\RedisManager;
 use AvtoDev\HealthChecks\Results\ResultInterface;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class RedisAccessCheck extends AbstractCheck
 {
@@ -18,40 +17,39 @@ class RedisAccessCheck extends AbstractCheck
     protected $redis_manager;
 
     /**
-     * @var ConfigRepository
-     */
-    protected $config;
-
-    /**
      * RedisCheck constructor.
      *
      * @param RedisManager     $redis_manager
-     * @param ConfigRepository $config
      */
-    public function __construct(RedisManager $redis_manager, ConfigRepository $config)
+    public function __construct(RedisManager $redis_manager, array $options = [])
     {
         $this->redis_manager = $redis_manager;
-        $this->config        = $config;
+
+        parent::__construct($options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function execute(array $options = []): ResultInterface
+    public function execute(): ResultInterface
     {
-        $connections = isset($options['connections']) && \count($options['connections']) > 0
-            ? \array_filter($options['connections'])
-            : [null];
-
         try {
+            $connections = $this->options['connections'] ?? ['default'];
+
+            if (!\is_array($connections)) {
+                throw new \InvalidArgumentException(
+                    sprintf('Connections option must be array, got %s', \gettype($connections))
+                );
+            }
+
             foreach ($connections as $connection) {
-                $connection_name = $connection ?? 'default-connection';
                 $redis_client    = $this->redis_manager->connection($connection)->client();
-                $key             = sprintf('%s:%s', $connection_name, $value = Str::random());
+                $key             = sprintf('%s:%s', $connection, $value = Str::random());
                 $redis_client->setex($key, 3, $value);
                 if ($redis_client->get($key) !== $value) {
                     return $this->fail(
-                        new Exception(sprintf('[%s] Value from redis are not same!', $connection_name))
+                        new Exception(sprintf('[%s] Value received from redis are not same that was written!',
+                            $connection))
                     );
                 }
             }

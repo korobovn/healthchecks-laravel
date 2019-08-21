@@ -10,29 +10,36 @@ use AvtoDev\HealthChecks\Results\ResultInterface;
 abstract class AbstractCheck implements CheckInterface
 {
     /**
-     * {@inheritdoc}
+     * @var array
      */
-    abstract public function execute(array $options = []): ResultInterface;
+    protected $options;
 
     /**
-     * Returns result for successful check.
-     *
-     * @return ResultInterface
+     * @param array $options
      */
-    protected function success(): ResultInterface
+    public function __construct(array $options = [])
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function execute(): ResultInterface;
+
+    /**
+     * @inheritdoc
+     */
+    public function success(): ResultInterface
     {
         return new Result;
     }
 
     /**
-     * Returns result for failed check.
-     *
-     * @param \Exception $e
-     *
-     * @return ResultInterface
+     * @inheritdoc
      */
-    protected function fail(\Exception $e): ResultInterface
+    public function fail(\Exception $exception): ResultInterface
     {
-        return new Result($e);
+        return new Result($exception);
     }
 }

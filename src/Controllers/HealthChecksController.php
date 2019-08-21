@@ -4,32 +4,34 @@ declare(strict_types = 1);
 
 namespace AvtoDev\HealthChecks\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use AvtoDev\HealthChecks\HealthChecksInterface;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Routing\Controller;
 
-class HealthChecksController extends \Illuminate\Routing\Controller
+class HealthChecksController extends Controller
 {
     /**
-     * @param Request               $request
      * @param HealthChecksInterface $health_checks
      * @param ResponseFactory       $factory
      *
      * @return JsonResponse
      */
-    public function check(Request $request,
-                          HealthChecksInterface $health_checks,
+    public function check(HealthChecksInterface $health_checks,
                           ResponseFactory $factory): JsonResponse
     {
-        $group = $request->input('group');
+        $response = [];
 
-        if (\is_string($group) && $group !== '') {
-            // Execute checks group
+        foreach ($health_checks->classes() as $check_class) {
+            $result = $health_checks->execute($check_class);
+
+            $response[] = \array_filter([
+                'check'  => $check_class,
+                'passed' => $result->passed(),
+                'error'  => $result->getErrorMessage(),
+            ]);
         }
 
-        return $factory->json([
-            // @todo: set data
-        ]);
+        return $factory->json($response);
     }
 }

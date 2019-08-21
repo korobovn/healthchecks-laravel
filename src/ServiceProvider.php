@@ -91,7 +91,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
             return new HealthChecks(
                 (array) $config->get("{$root}.checks"),
-                (array) $config->get("{$root}.groups"),
                 $container
             );
         });
